@@ -27,6 +27,7 @@
                             Description = "GachiBowli",
                         }
                     },
+                    SharedGroupId = new Guid("46da8f83-610e-47c9-a5f7-a666c6dea646"),
                     UpdateLocationDate = new DateTime(2020, 6, 14),
                     IsActive = true,
                     IsEnded = false,
@@ -51,7 +52,15 @@
                         {
                             new LocationData()
                             {
-
+                                Latitude = 17.4401,
+                                Longitude = 78.3489,
+                                Description = "GachiBowli",
+                            },
+                            new LocationData()
+                            {
+                                Latitude = 17.404563,
+                                Longitude = 78.330833,
+                                Description = "GGK Technologies Kokapet, Hyderabad, Telangana 500075"
                             }
                         }
                     }
@@ -94,7 +103,15 @@
                         {
                             new LocationData()
                             {
-
+                                Latitude = 17.4401,
+                                Longitude = 78.3489,
+                                Description = "GachiBowli",
+                            },
+                            new LocationData()
+                            {
+                                Latitude = 17.404563,
+                                Longitude = 78.330833,
+                                Description = "GGK Technologies Kokapet, Hyderabad, Telangana 500075"
                             }
                         }
                     }
@@ -149,7 +166,8 @@
                             foreach (var waypoint in ride.RideRoute.WayPoints)
                             {
                                 var waypointLocation = new GeoCoordinate(waypoint.Latitude, waypoint.Longitude);
-                                if (userStartLocation.GetDistanceTo(waypointLocation) > userPreferences.MaxWalkDistanceInMeters)
+                                var dist = userStartLocation.GetDistanceTo(waypointLocation);
+                                if (dist < userPreferences.MaxWalkDistanceInMeters)
                                 {
                                     startMatchedRides.Add(ride);
                                     break;
@@ -159,7 +177,7 @@
                             foreach (var waypoint in ride.RideRoute.WayPoints)
                             {
                                 var waypointLocation = new GeoCoordinate(waypoint.Latitude, waypoint.Longitude);
-                                if (userEndLocation.GetDistanceTo(waypointLocation) > userPreferences.MaxWalkDistanceInMeters)
+                                if (userEndLocation.GetDistanceTo(waypointLocation) < userPreferences.MaxWalkDistanceInMeters)
                                 {
                                     endMatchedRides.Add(ride);
                                     break;
