@@ -15,7 +15,7 @@
         [Route("api/ping")]
         public ActionResult Index()
         {
-            return this.Ok("trigger is working");
+            return this.Ok("pong");
         }
     }
 }
