@@ -1,0 +1,12 @@
+steps:
+# Build the Docker image.
+- name: gcr.io/cloud-builders/docker
+  args: ['build', '-t', 'gcr.io/pod-ggk-geekrebbot2020/app', '.']
+# Push it to GCR.
+- name: gcr.io/cloud-builders/docker
+  args: ['push', 'gcr.io/pod-ggk-geekrebbot2020/app']
+# Deploy your Flex app from the image in GCR.
+- name: gcr.io/cloud-builders/gcloud
+  args: ['app', 'deploy', 'app.yaml', '--image-url=gcr.io/pod-ggk-geekrebbot2020/app']
+# Note that this build pushes this image.
+images: ['gcr.io/pod-ggk-geekrebbot2020/app']
